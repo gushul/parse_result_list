@@ -64,11 +64,12 @@ while index < total
     output_file.write("#{rating}:\n")
 	  if rating == "Рейтинг"
 	    index +=2
-	    cell = worksheet.sheet_data[index][3]
+	    cell = worksheet.sheet_data[index][2]
 	    title  = cell && cell.value
+
 	    output_file.write("#{title}:\n")
 
-	    while index < total
+	    while
 	      index += 1
 	      if worksheet.sheet_data[index]
 		      cell = worksheet.sheet_data[index][2]
@@ -82,7 +83,7 @@ while index < total
 		      result_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
 		      output_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
 	      else
-		 break
+          break
 	      end
 	    end
 	  end

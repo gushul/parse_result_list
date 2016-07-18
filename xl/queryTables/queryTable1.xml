@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<queryTable xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" name="ExternalData_1" backgroundRefresh="0" connectionId="5" autoFormatId="16" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="0"><queryTableRefresh nextId="5"><queryTableFields count="2"><queryTableField id="3" name="Id" tableColumnId="1"/><queryTableField id="4" name="Title" tableColumnId="2"/></queryTableFields></queryTableRefresh></queryTable>

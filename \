@@ -2,40 +2,6 @@ class  ImportRaytingWorker
 	require 'rubyXL'
 	require 'json'
 
-	def self.rating_total
-		debug_file = open("output.txt", 'w')
-		result_file = open("result.txt", 'w')
-		debug_file.write("Begin\n")
-		workbook = RubyXL::Parser.parse("rating_2015.xlsm")
-		worksheet = workbook.worksheets[0]
-		total = 0
-		worksheet.each { |row| total +=1}
-		debug_file.write("total is #{total}\n" )
-		index = 1
-		print total
-		print "\n"
-
-		rating_total = 0
-		debug_file.write("Before while\n")
-		while index < total
-		    cell = worksheet.sheet_data[index][1] if worksheet.sheet_data[index]
-		    rating = cell && cell.value
-
-			  if rating == "Рейтинг"
-				  index +=1
-				  rating_total +=1
-				print "================\n"
-				
-				print "\n"
-				print "#{index}: #{rating}: #{rating_total}"
-				print "\n"
-				print "================\n"
-			  end
-			  index +=1
-		end
-		print total
-	end
-
 	def self.perform
 
 
@@ -99,10 +65,6 @@ class  ImportRaytingWorker
 
 			  if rating == "Рейтинг"
 				  index +=1
-				print "================\n"
-				print rating
-				print "\n"
-				print "================\n"
 				index = get_set_ratings(index, worksheet,  debug_file)
 			  end
 		  end
@@ -124,9 +86,11 @@ class  ImportRaytingWorker
 			cell = worksheet.sheet_data[index+1][2]
 			next_cell  = cell && cell.value
 			if(rate_titles.include?(title) && next_cell.is_a?(Integer))
-				#print "================\n"
-				#print title
-				#print "\n================\n"
+				if title == rate_titles[0]
+					print "================\n"
+					print title == rate_titles[0]
+					print "\n================\n"
+				end
 			end
 			if(rate_titles.include?(title) && next_cell.is_a?(Integer))
 			  debug_file.write("#{title}:\n")
@@ -160,6 +124,4 @@ class  ImportRaytingWorker
 	end
 
 end
-#ImportRaytingWorker.perform
-ImportRaytingWorker.rating_total
-
+ImportRaytingWorker.perform

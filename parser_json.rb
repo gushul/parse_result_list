@@ -6,7 +6,7 @@ class  ImportRaytingWorker
 
 
     debug_file = open("output.txt", 'w')
-    result_file = open("result.txt", 'w')
+    result_file = open("result.json", 'w')
     debug_file.write("Begin\n")
     workbook = RubyXL::Parser.parse("rating_2015.xlsm")
     worksheet = workbook.worksheets[0]
@@ -34,6 +34,7 @@ class  ImportRaytingWorker
 	result_inst  = Hash.new
 	result_inst[:institute_title] = current_inst
 	result_inst[:specialities] = []
+	result.push(result_inst)
 
 
         index +=1
@@ -78,12 +79,17 @@ class  ImportRaytingWorker
 	  spec[:ratings] = []
 	  index = get_set_ratings(index, worksheet,  debug_file, spec)
 	  result_inst[:specialities].push(spec)
+	  result.pop
+	  result.push(result_inst)
+
         end
       end
 
       index += 1
     end
     debug_file.close
+    print result.to_json
+    result_file.puts result.to_json
   end
 
   def self.get_set_ratings(index, worksheet, debug_file, spec)
@@ -104,7 +110,7 @@ class  ImportRaytingWorker
 	  
 
           index = get_rating_data(index, worksheet,  debug_file, rating)
-	  spec[ratings].push(rating)
+	  spec[:ratings].push(rating)
 
         else
           index +=1

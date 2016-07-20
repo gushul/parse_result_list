@@ -104,7 +104,7 @@ class  ImportRaytingWorker
 	  
 
           index = get_rating_data(index, worksheet,  debug_file, rating)
-	  spec[ratings].push(rating)
+	  spec[:ratings].push(rating)
 
         else
           index +=1

@@ -88,7 +88,6 @@ class  ImportRaytingWorker
       index += 1
     end
     debug_file.close
-    print result.to_json
     result_file.puts result.to_json
   end
 
@@ -107,8 +106,8 @@ class  ImportRaytingWorker
 	  rating = Hash.new
 	  rating[:title] = title
 	  rating[:rating] = []
-	  
 
+	  index +=1
           index = get_rating_data(index, worksheet,  debug_file, rating)
 	  spec[:ratings].push(rating)
 
@@ -135,11 +134,12 @@ class  ImportRaytingWorker
         name  = cell && cell.value
 	submit[:name] = name
         cell = worksheet.sheet_data[index][5]
-        sum  = cell && cell.value
+        total  = cell && cell.value
 	submit[:total] = total
         #result_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
         debug_file.write("student: #{position}, #{id}, #{name}, #{sum} \n")
 	rating[:rating].push(submit)
+	print rating.to_json
         until_cell = nil
         index +=1
         until_cell = worksheet.sheet_data[index][3] if worksheet.sheet_data[index]

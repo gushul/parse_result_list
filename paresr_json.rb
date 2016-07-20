@@ -42,7 +42,6 @@ class  ImportRaytingWorker
         cell = worksheet.sheet_data[index][5] if worksheet.sheet_data[index]
         spec_title  = cell && cell.value
         debug_file.write("speciality: #{spec_title}\n")
-        spec_hash.store(current_spec, "")
         spec = Hash.new
 	spec[:title] = spec_title
 
@@ -76,7 +75,9 @@ class  ImportRaytingWorker
 
         if rating == "Рейтинг"
           index +=1
-        index = get_set_ratings(index, worksheet,  debug_file, spec)
+	  spec[:ratings] = []
+	  index = get_set_ratings(index, worksheet,  debug_file, spec)
+	  result_inst[:specialities].push(spec)
         end
       end
 
@@ -97,8 +98,14 @@ class  ImportRaytingWorker
         next_cell  = cell && cell.value
         if(rate_titles.include?(title) && next_cell.is_a?(Integer))
           debug_file.write("#{title}:\n")
-          index +=1
-          index = get_rating_data(index, worksheet,  debug_file, spec)
+	  rating = Hash.new
+	  rating[:title] = title
+	  rating[:rating] = []
+	  
+
+          index = get_rating_data(index, worksheet,  debug_file, rating)
+	  spec[ratings].push(rating)
+
         else
           index +=1
         end
@@ -107,19 +114,26 @@ class  ImportRaytingWorker
     end
     index
   end
-  def self.get_rating_data(index, worksheet, debug_file, spec)
+  def self.get_rating_data(index, worksheet, debug_file, rating)
         until_cell = worksheet.sheet_data[index][3]
     while until_cell
+	submit = Hash.new
         cell = worksheet.sheet_data[index][2]
-        rate  = cell && cell.value
+        position  = cell && cell.value
+	submit[:position] = position
+
         cell = worksheet.sheet_data[index][3]
         id  = cell && cell.value
+	submit[:id] = id
         cell = worksheet.sheet_data[index][4]
         name  = cell && cell.value
+	submit[:name] = name
         cell = worksheet.sheet_data[index][5]
         sum  = cell && cell.value
+	submit[:total] = total
         #result_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
-        debug_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
+        debug_file.write("student: #{position}, #{id}, #{name}, #{sum} \n")
+	rating[:rating].push(submit)
         until_cell = nil
         index +=1
         until_cell = worksheet.sheet_data[index][3] if worksheet.sheet_data[index]
@@ -129,5 +143,3 @@ class  ImportRaytingWorker
 
 end
 ImportRaytingWorker.perform
-#ImportRaytingWorker.rating_total
-

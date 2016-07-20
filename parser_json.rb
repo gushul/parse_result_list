@@ -26,7 +26,7 @@ class  ImportRaytingWorker
       current  = cell && cell.value
 
       if current == "Институт / факультет"
-        
+
         cell = worksheet.sheet_data[index][5] if worksheet.sheet_data[index]
         current_inst  = cell && cell.value
         debug_file.write("Institute: #{current_inst}\n")
@@ -50,7 +50,7 @@ class  ImportRaytingWorker
         cell = worksheet.sheet_data[index][1] if worksheet.sheet_data[index]
         description  = cell && cell.value
         debug_file.write("set: #{description}\n")
-	spec[:description] = description 
+	spec[:description] = description
 
         index +=1
         cell = worksheet.sheet_data[index][2] if worksheet.sheet_data[index]
@@ -88,7 +88,8 @@ class  ImportRaytingWorker
       index += 1
     end
     debug_file.close
-    result_file.puts result.to_json
+    result_file.write(result.to_json  )
+    result_file.close
   end
 
   def self.get_set_ratings(index, worksheet, debug_file, spec)

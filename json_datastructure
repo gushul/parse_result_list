@@ -1,18 +1,18 @@
 [
 	{
-		institute_title: "name", 
+		institute_title: "Гуманитарно-правовой колледж", 
 		specialities: [
 			{
-				title: "name_spec",
-				description: "description"
-				plan:
-				submitted:
-				contest:
+				title: "40.02.01 Право и организация социального обеспечения",
+				description: "Очная, 1 курс, Бюджетные места, На базе основного общего образования, Специальность среднего профессионального образования"
+				plan: "42(0)"
+				submitted: "159"
+				contest: "3.79"
 				raitings: [
-					raiting:
-					id:
-					name:	
-					total:
+					raiting: 1,
+					id: "0008ГУМК_ПРАВШ_БП_Д_2,8_15"
+					name: "Вегерина Варвара Юрьевна"
+					total: "5,0000"
 				]
 			}
 		

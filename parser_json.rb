@@ -136,8 +136,7 @@ class  ImportRaytingWorker
         cell = worksheet.sheet_data[index][5]
         total  = cell && cell.value
 	submit[:total] = total
-        #result_file.write("student: #{rate}, #{id}, #{name}, #{sum} \n")
-        debug_file.write("student: #{position}, #{id}, #{name}, #{sum} \n")
+        debug_file.write("student: #{position}, #{id}, #{name}, #{total} \n")
 	rating[:rating].push(submit)
 	print rating.to_json
         until_cell = nil

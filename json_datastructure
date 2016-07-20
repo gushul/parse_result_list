@@ -1,0 +1,22 @@
+[
+	{
+		institute_title: "name", 
+		specialities: [
+			{
+				title: "name_spec",
+				description: "description"
+				plan:
+				submitted:
+				contest:
+				raitings: [
+					raiting:
+					id:
+					name:	
+					total:
+				]
+			}
+		
+		]
+	}
+
+]

@@ -2,6 +2,7 @@ class  ImportRaytingWorker
 	require 'rubyXL'
 	require 'json'
 
+
 	def self.rating_total
 		debug_file = open("output.txt", 'w')
 		result_file = open("result.txt", 'w')
@@ -18,16 +19,18 @@ class  ImportRaytingWorker
 		rating_total = 0
 		debug_file.write("Before while\n")
 		while index < total
-		    cell = worksheet.sheet_data[index][1] if worksheet.sheet_data[index]
-		    rating = cell && cell.value
+		    cell = worksheet.sheet_data[index][0] if worksheet.sheet_data[index]
+		    current = cell && cell.value
+		    #rating = cell && cell.value
+			    if current == "Направление подготовки / специальность"
 
-			  if rating == "Рейтинг"
+			 # if rating == "Рейтинг"
 				  index +=1
 				  rating_total +=1
 				print "================\n"
-				
+
 				print "\n"
-				print "#{index}: #{rating}: #{rating_total}"
+				print "#{index}: #{current}: #{rating_total}"
 				print "\n"
 				print "================\n"
 			  end
@@ -66,7 +69,10 @@ class  ImportRaytingWorker
 		    results.store(current_inst, "")
 		    spec_hash = Hash.new
 
+
 		    index +=1
+		    next
+		  elsif current == "Направление подготовки / специальность"
 		    cell = worksheet.sheet_data[index][5] if worksheet.sheet_data[index]
 		    current_spec  = cell && cell.value
 		    debug_file.write("speciality: #{current_spec}\n")
@@ -99,10 +105,6 @@ class  ImportRaytingWorker
 
 			  if rating == "Рейтинг"
 				  index +=1
-				print "================\n"
-				print rating
-				print "\n"
-				print "================\n"
 				index = get_set_ratings(index, worksheet,  debug_file)
 			  end
 		  end
@@ -110,8 +112,6 @@ class  ImportRaytingWorker
 		  index += 1
 		end
 		debug_file.close
-	end
-	def self.get_spec_set(index, worksheet, debug_file)
 	end
 
 	def self.get_set_ratings(index, worksheet, debug_file)
@@ -121,19 +121,16 @@ class  ImportRaytingWorker
 		while i < 2
 			cell = worksheet.sheet_data[index][2]
 			title  = cell && cell.value
-			cell = worksheet.sheet_data[index+1][2]
-			next_cell  = cell && cell.value
-			if(rate_titles.include?(title) && next_cell.is_a?(Integer))
-				#print "================\n"
-				#print title
-				#print "\n================\n"
-			end
-			if(rate_titles.include?(title) && next_cell.is_a?(Integer))
-			  debug_file.write("#{title}:\n")
-			  index +=1
-			  index = get_rating_data(index, worksheet,  debug_file)
-			else
-			  index +=1
+			if worksheet.sheet_data[index+1]
+				cell = worksheet.sheet_data[index+1][2]
+				next_cell  = cell && cell.value
+				if(rate_titles.include?(title) && next_cell.is_a?(Integer))
+				  debug_file.write("#{title}:\n")
+				  index +=1
+				  index = get_rating_data(index, worksheet,  debug_file)
+				else
+				  index +=1
+				end
 			end
 			i +=1
 		end
@@ -141,7 +138,7 @@ class  ImportRaytingWorker
 	end
 	def self.get_rating_data(index, worksheet, debug_file)
 	      until_cell = worksheet.sheet_data[index][3]
-	  while until_cell 
+	  while until_cell
 	      cell = worksheet.sheet_data[index][2]
 	      rate  = cell && cell.value
 	      cell = worksheet.sheet_data[index][3]
@@ -160,6 +157,6 @@ class  ImportRaytingWorker
 	end
 
 end
-#ImportRaytingWorker.perform
-ImportRaytingWorker.rating_total
+ImportRaytingWorker.perform
+#ImportRaytingWorker.rating_total
 

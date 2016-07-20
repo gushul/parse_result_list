@@ -138,7 +138,6 @@ class  ImportRaytingWorker
 	submit[:total] = total
         debug_file.write("student: #{position}, #{id}, #{name}, #{total} \n")
 	rating[:rating].push(submit)
-	print rating.to_json
         until_cell = nil
         index +=1
         until_cell = worksheet.sheet_data[index][3] if worksheet.sheet_data[index]

@@ -70,7 +70,22 @@ class  ImportRaytingWorker
         debug_file.write("contest: #{contest}\n")
 	spec[:contest] = contest
 
-        index +=5
+        index +=4
+        cell = worksheet.sheet_data[index][7] if worksheet.sheet_data[index]
+        exam_1 = cell && cell.value
+  spec[:exam_1] = exam_1
+        cell = worksheet.sheet_data[index][8] if worksheet.sheet_data[index]
+        exam_2 = cell && cell.value
+  spec[:exam_2] = exam_2
+        cell = worksheet.sheet_data[index][9] if worksheet.sheet_data[index]
+        exam_3 = cell && cell.value
+  spec[:exam_3] = exam_3
+        cell = worksheet.sheet_data[index][10] if worksheet.sheet_data[index]
+        exam_4 = cell && cell.value
+  spec[:exam_4] = exam_4
+
+
+        index +=1
         cell = worksheet.sheet_data[index][1] if worksheet.sheet_data[index]
         rating = cell && cell.value
 
@@ -123,20 +138,53 @@ class  ImportRaytingWorker
   def self.get_rating_data(index, worksheet, debug_file, rating)
         until_cell = worksheet.sheet_data[index][3]
     while until_cell
-	submit = Hash.new
+        submit = Hash.new
         cell = worksheet.sheet_data[index][2]
         position  = cell && cell.value
-	submit[:position] = position
+        submit[:position] = position
 
         cell = worksheet.sheet_data[index][3]
         id  = cell && cell.value
-	submit[:id] = id
+        submit[:id] = id
+
         cell = worksheet.sheet_data[index][4]
         name  = cell && cell.value
-	submit[:name] = name
+        submit[:name] = name
+
         cell = worksheet.sheet_data[index][5]
         total  = cell && cell.value
-	submit[:total] = total
+        submit[:total] = total
+
+        cell = worksheet.sheet_data[index][7] if worksheet.sheet_data[index]
+        exam_1 = cell && cell.value
+        submit[:exam_1] = exam_1
+
+        cell = worksheet.sheet_data[index][8] if worksheet.sheet_data[index]
+        exam_2 = cell && cell.value
+        submit[:exam_2] = exam_2
+
+        cell = worksheet.sheet_data[index][9] if worksheet.sheet_data[index]
+        exam_3 = cell && cell.value
+        submit[:exam_3] = exam_3
+
+        cell = worksheet.sheet_data[index][10] if worksheet.sheet_data[index]
+        exam_4 = cell && cell.value
+        submit[:exam_4] = exam_4
+
+        cell = worksheet.sheet_data[index][11] if worksheet.sheet_data[index]
+        doc_original = cell && cell.value
+        submit[:doc_original] = doc_original
+
+
+        cell = worksheet.sheet_data[index][11] if worksheet.sheet_data[index]
+        privilege = cell && cell.value
+
+        submit[:privilege] = privilege
+
+        cell = worksheet.sheet_data[index][12] if worksheet.sheet_data[index]
+        benefit = cell && cell.value
+        submit[:benefit] = benefit
+
         debug_file.write("student: #{position}, #{id}, #{name}, #{total} \n")
 	rating[:rating].push(submit)
         until_cell = nil

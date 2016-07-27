@@ -8,7 +8,7 @@ class  ImportRaytingWorker
     debug_file = open("output.txt", 'w')
     result_file = open("result.json", 'w')
     debug_file.write("Begin\n")
-    workbook = RubyXL::Parser.parse("rating_2015.xlsm")
+    workbook = RubyXL::Parser.parse("rating_2016.xlsm")
     worksheet = workbook.worksheets[0]
     total = 0
     worksheet.each { |row| total +=1}
@@ -92,6 +92,7 @@ class  ImportRaytingWorker
         if rating == "Рейтинг"
           index +=1
 	  spec[:ratings] = []
+    spec[:names]   = []
 	  index = get_set_ratings(index, worksheet,  debug_file, spec)
 	  result_inst[:specialities].push(spec)
 	  result.pop
@@ -121,11 +122,12 @@ class  ImportRaytingWorker
           debug_file.write("#{title}:\n")
 	  rating = Hash.new
 	  rating[:title] = title
-	  rating[:rating] = []
+	  rating[:list]  = []
 
 	  index +=1
-          index = get_rating_data(index, worksheet,  debug_file, rating)
+          index = get_rating_data(index, worksheet,  debug_file, rating, spec)
 	  spec[:ratings].push(rating)
+
 
         else
           index +=1
@@ -135,7 +137,7 @@ class  ImportRaytingWorker
     end
     index
   end
-  def self.get_rating_data(index, worksheet, debug_file, rating)
+  def self.get_rating_data(index, worksheet, debug_file, rating, spec)
         until_cell = worksheet.sheet_data[index][3]
     while until_cell
         submit = Hash.new
@@ -150,6 +152,8 @@ class  ImportRaytingWorker
         cell = worksheet.sheet_data[index][4]
         name  = cell && cell.value
         submit[:name] = name
+        last_name = name.split.first
+        spec[:names].push(last_name)
 
         cell = worksheet.sheet_data[index][5]
         total  = cell && cell.value
@@ -186,7 +190,7 @@ class  ImportRaytingWorker
         submit[:benefit] = benefit
 
         debug_file.write("student: #{position}, #{id}, #{name}, #{total} \n")
-	rating[:rating].push(submit)
+	      rating[:list].push(submit)
         until_cell = nil
         index +=1
         until_cell = worksheet.sheet_data[index][3] if worksheet.sheet_data[index]

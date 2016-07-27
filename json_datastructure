@@ -8,21 +8,39 @@
 				plan: "42(0)"
 				submitted: "159"
 				contest: "3.79"
+				names: [list of fio]
+				exam_1: "title"
+				exam_2: "title"
+				exam_3: "title"
+				exam_4: "title"
 				ratings: [
 					title: title
-					rating: [
+					list: [
 
 						{
 							position: 1,
 							id: "0008ГУМК_ПРАВШ_БП_Д_2,8_15",
 							name: "Вегерина Варвара Юрьевна",
 							total: "5,0000"
+							exam_1: 100
+							exam_2: 100
+							exam_3: 100
+							exam_4: 100
+
+
+							doc_original: "да "
+							privilege: "title"
+							benefit: "title"
 						},
 						{
 							position: 1,
 							id: "0008ГУМК_ПРАВШ_БП_Д_2,8_15",
 							name: "Вегерина Варвара Юрьевна",
 							total: "5,0000"
+							exam_1: 100
+							exam_2: 100
+							exam_3: 100
+							exam_4: 100
 						}
 					],
 				]

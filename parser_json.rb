@@ -159,6 +159,10 @@ class  ImportRaytingWorker
         total  = cell && cell.value
         submit[:total] = total
 
+        cell = worksheet.sheet_data[index][5]
+        achiev = cell && cell.value
+        submit[:achiev] = achiev
+
         cell = worksheet.sheet_data[index][7] if worksheet.sheet_data[index]
         exam_1 = cell && cell.value
         submit[:exam_1] = exam_1

@@ -27,9 +27,9 @@
 							exam_2: 100
 							exam_3: 100
 							exam_4: 100
-
-
-							doc_original: "да "
+							doc_original: "да"
+							agreement: "да"
+							decision: "да"
 							privilege: "title"
 							benefit: "title"
 						},

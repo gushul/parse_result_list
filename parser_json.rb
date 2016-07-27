@@ -183,13 +183,19 @@ class  ImportRaytingWorker
         doc_original = cell && cell.value
         submit[:doc_original] = doc_original
 
+        cell = worksheet.sheet_data[index][12] if worksheet.sheet_data[index]
+        doc_original = cell && cell.value
+        submit[:agreement] = doc_original
 
-        cell = worksheet.sheet_data[index][11] if worksheet.sheet_data[index]
+        cell = worksheet.sheet_data[index][13] if worksheet.sheet_data[index]
+        doc_original = cell && cell.value
+        submit[:decision] = doc_original
+
+        cell = worksheet.sheet_data[index][14] if worksheet.sheet_data[index]
         privilege = cell && cell.value
-
         submit[:privilege] = privilege
 
-        cell = worksheet.sheet_data[index][12] if worksheet.sheet_data[index]
+        cell = worksheet.sheet_data[index][15] if worksheet.sheet_data[index]
         benefit = cell && cell.value
         submit[:benefit] = benefit
 

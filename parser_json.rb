@@ -73,16 +73,23 @@ class  ImportRaytingWorker
         index +=4
         cell = worksheet.sheet_data[index][7] if worksheet.sheet_data[index]
         exam_1 = cell && cell.value
-  spec[:exam_1] = exam_1
+        exam_1 = "" if exam_1 == nil
+        spec[:exam_1] = exam_1
         cell = worksheet.sheet_data[index][8] if worksheet.sheet_data[index]
         exam_2 = cell && cell.value
-  spec[:exam_2] = exam_2
+        exam_2 = "" if exam_2 == nil
+        spec[:exam_2] = exam_2
+
         cell = worksheet.sheet_data[index][9] if worksheet.sheet_data[index]
         exam_3 = cell && cell.value
-  spec[:exam_3] = exam_3
+        exam_3 = "" if exam_3 == nil
+        spec[:exam_3] = exam_3
+
         cell = worksheet.sheet_data[index][10] if worksheet.sheet_data[index]
         exam_4 = cell && cell.value
-  spec[:exam_4] = exam_4
+        exam_4 = "" if exam_4 == nil
+        spec[:exam_4] = exam_4
+
 
 
         index +=1
@@ -165,18 +172,22 @@ class  ImportRaytingWorker
 
         cell = worksheet.sheet_data[index][7] if worksheet.sheet_data[index]
         exam_1 = cell && cell.value
+        exam_1 = "" if exam_1 == nil
         submit[:exam_1] = exam_1
 
         cell = worksheet.sheet_data[index][8] if worksheet.sheet_data[index]
         exam_2 = cell && cell.value
+        exam_2 = "" if exam_2 == nil
         submit[:exam_2] = exam_2
 
         cell = worksheet.sheet_data[index][9] if worksheet.sheet_data[index]
         exam_3 = cell && cell.value
+        exam_3 = "" if exam_3 == nil
         submit[:exam_3] = exam_3
 
         cell = worksheet.sheet_data[index][10] if worksheet.sheet_data[index]
         exam_4 = cell && cell.value
+        exam_4 = "" if exam_4 == nil
         submit[:exam_4] = exam_4
 
         cell = worksheet.sheet_data[index][11] if worksheet.sheet_data[index]
